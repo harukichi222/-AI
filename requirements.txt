@@ -1,0 +1,7 @@
+flask
+pandas
+lightgbm
+scikit-learn
+beautifulsoup4
+requests
+lxml

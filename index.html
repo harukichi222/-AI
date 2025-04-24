@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI競艇予想</title>
+    <style>
+        body { font-family: sans-serif; margin: 2em; background: #f7f7f7; }
+        .race { background: #fff; padding: 1em; margin-bottom: 1.5em; border-radius: 8px; box-shadow: 0 2px 6px #ccc; }
+        table { width: 100%; border-collapse: collapse; margin-top: 0.5em; }
+        th, td { border: 1px solid #ccc; padding: 0.5em; text-align: center; font-size: 0.9em; }
+        h2 { margin-bottom: 0.3em; color: #333; }
+        .label { font-size: 0.8em; color: #666; }
+    </style>
+</head>
+<body>
+    <h1>AI競艇予想（3連単・荒れ度・回収率）</h1>
+    {% for race in races %}
+    <div class="race">
+        <h2>{{ race.race_id }}</h2>
+        <div class="label">AIによる予測結果</div>
+        <table>
+            <tr>
+                <th>枠番</th><th>勝率</th><th>ST平均</th><th>展示</th><th>風速</th><th>1着確率</th><th>荒れ度</th><th>期待値</th>
+            </tr>
+            {% for row in race.data %}
+            <tr>
+                <td>{{ row.枠番 }}</td><td>{{ row.勝率 }}</td><td>{{ row.ST平均 }}</td><td>{{ row.展示タイム }}</td><td>{{ row.風速 }}</td><td>{{ row.1着確率 }}%</td><td>{{ row.荒れ度 }}</td><td>{{ row.期待値 }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <p><strong>3連単候補:</strong> {{ race.data[0]['3連単候補'] }}</p>
+    </div>
+    {% endfor %}
+</body>
+</html>
